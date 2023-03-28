@@ -20,20 +20,27 @@ class ShopifyMain(http.Controller):
             "status": widget.status
         }
         return {
-            'products_included': len(widget.product_ids),
+            'products_included': len(widget.recommendation_product_ids),
             'widget_data': widget_data
         }
 
     @http.route("/bought_together/save_widget", type='json', auth="user")
     def save_widget(self, **kw):
-        list_product_ids = []
-        for product in kw['products']:
-            list_product_ids.append(
+        list_excluded_product_ids = []
+        list_recommendation_product_ids = []
+        for product in kw['recommendation_products']:
+            list_recommendation_product_ids.append(
                 request.env['shopify.product'].sudo().search([("shopify_product_id", '=', product['id'])]).id
             )
+        for product in kw['excluded_products']:
+            list_excluded_product_ids.append(
+                request.env['shopify.product'].sudo().search([("shopify_product_id", '=', product['id'])]).id
+            )
+        
         exist_widget = request.env['shopify.widget'].sudo().search([])
         data = {
-            'product_ids': [(6, 0, list_product_ids)],
+            'excluded_product_ids': [(6, 0, list_excluded_product_ids)],
+            'recommendation_product_ids': [(6, 0, list_recommendation_product_ids)],
             "widget_description": kw['widget_description'],
             "total_compare_at_price": float(kw['total_compare_at_price']),
             'title_color': kw['title_color'],

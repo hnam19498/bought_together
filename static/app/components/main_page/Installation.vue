@@ -23,9 +23,7 @@ export default {
     data() {
         return {}
     },
-    props: {
-        shop_url: String
-    },
+    props: {shop_url: String},
     methods: {
         handleThemeCustomization() {
             window.location.replace('https://' + this.shop_url + '/admin/themes/current/editor')
