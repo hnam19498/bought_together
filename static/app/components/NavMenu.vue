@@ -1,7 +1,11 @@
 <template>
     <div class="nav-menu">
-        <div :key="tab" @click="changeTab(tab)" class="nav-item" v-for="tab in navtabs"
-             :class="{ active: tab == currentTab }"> {{ tab }}
+        <div :key="tab"
+             @click="changeTab(tab)"
+             class="nav-item"
+             v-for="tab in navtabs"
+             :class="{ active: tab == currentTab }">
+            {{ tab }}
         </div>
     </div>
 </template>

@@ -127,7 +127,8 @@
                 <div style="display: flex; flex-direction: row">
                     <div
                         style="display: flex; flex-direction: row; margin-top: 50px; width: 100%; justify-content: center">
-                        <div :key="product.id" v-for="product in this.list_recommendation"
+                        <div :key="product.id"
+                             v-for="product in this.list_recommendation"
                              style="display: flex; align-items: center">
                             <img :src="product.img"
                                  style="border: 1px solid #E2E2E2; border-radius: 5px; width: 65px; height: 65px">
@@ -150,10 +151,13 @@
                     </div>
                 </div>
                 <div style="margin-top: 18px; margin-bottom: 17px">
-                    <div style="display: flex; flex-direction: row" class="item"
+                    <div style="display: flex; flex-direction: row"
+                         class="item"
                          v-for="product in this.list_recommendation"
                          :key="product.id">
-                        <input type="checkbox" :value="product.id" disabled
+                        <input type="checkbox"
+                               :value="product.id"
+                               disabled
                                :checked="this.list_ids.includes(product.id)">
                         <div>{{ product.name }}</div>
                         <span style="color: red">${{ product.price }}</span>

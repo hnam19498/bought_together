@@ -46,6 +46,7 @@ class ShopifyProduct(models.Model):
     qty = fields.Integer('Quantity')
     url_img = fields.Char()
     compare_at_price = fields.Float()
+    variant_id = fields.Char()
 
 
 class ShopifyWidget(models.Model):

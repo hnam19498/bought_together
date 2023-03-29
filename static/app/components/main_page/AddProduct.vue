@@ -2,8 +2,10 @@
     <div v-if="products">
         <div class="setting-btn">
             <button @click="cancelAddProducts" class="btn-setting" id="btn-cancel">Cancel</button>
-            <button :disabled="list_recommendation.length > 5 || list_recommendation.length == 0" class="btn-setting"
-                    id="btn-save" @click="saveAddProducts">SAVE
+            <button :disabled="list_recommendation.length > 5 || list_recommendation.length == 0"
+                    class="btn-setting"
+                    id="btn-save"
+                    @click="saveAddProducts">SAVE
             </button>
         </div>
         <div id="setting_widget">
@@ -21,26 +23,29 @@
                     <span>Choose recommendation product(s)</span>
                 </div>
                 <div class="search">
-                    <a-input v-model:value="search_recommendation" placeholder="Search product by name"
+                    <a-input v-model:value="search_recommendation"
+                             placeholder="Search product by name"
                              :suffix="this.list_recommendation.length + ' selected'"/>
                 </div>
                 <div class="recommendation_products" v-if="this.list_recommendation.length > 0">
-                    <div :key="recommendation_product.id" v-for="recommendation_product of this.list_recommendation"
+                    <div :key="recommendation_product.id"
+                         v-for="recommendation_product of this.list_recommendation"
                          class="recommendation_product">
-                        <div style="height: 17px; margin-left: 10px; margin-bottom: 5px; margin-top: 5px"> {{
-                                recommendation_product.name
-                            }}
+                        <div style="height: 17px; margin-left: 10px; margin-bottom: 5px; margin-top: 5px">
+                            {{ recommendation_product.name }}
                         </div>
-                        <font-awesome-icon :icon="['fas', 'circle-xmark']" size="sm"
+                        <font-awesome-icon :icon="['fas', 'circle-xmark']"
                                            @click="handleClickRecommendationProduct(recommendation_product.id)"
-                                           style="height: 15px; margin-right: 10px; color: red; margin-top: 5px; width: 15px; margin-bottom: 5px"/>
+                                           style="height: 15px; margin-right: 10px; color: red; margin-top: 5px; width: 15px; margin-bottom: 5px"
+                                           size="sm"/>
                     </div>
                 </div>
                 <div id="table-product">
                     <table>
                         <tr class="table-col-name">
                             <td>
-                                <input type="checkbox" @change="SelectAllRecommendation"
+                                <input type="checkbox"
+                                       @change="SelectAllRecommendation"
                                        v-model="tickAllRecommendation">
                             </td>
                             <td>Image</td>
@@ -49,17 +54,21 @@
                             <td>Compare at price</td>
                             <td>In Stock</td>
                         </tr>
-                        <tr class="table-row" v-for="product in filteredRecommendation" :key="product.id">
+                        <tr class="table-row"
+                            v-for="product in filteredRecommendation"
+                            :key="product.id">
                             <td>
                                 <input :checked="list_recommendation.filter(e => e.id == product.id).length > 0"
-                                       type="checkbox" :id="product.id" @change="select_recommendation" :value="{
-                                        id: product.id,
-                                        name: product.name,
-                                        price: product.price,
-                                        img: product.url_img,
-                                        compare_at_price: product.compare_at_price,
-                                        quantity: product.qty
-                                    }">
+                                       type="checkbox"
+                                       :value="{
+                                           id: product.id,
+                                           name: product.name,
+                                           price: product.price,
+                                           img: product.url_img,
+                                           compare_at_price: product.compare_at_price,
+                                           quantity: product.qty}"
+                                       :id="product.id"
+                                       @change="select_recommendation">
                             </td>
                             <td><img :src="product.url_img" style="width: 30px; height: 30px"></td>
                             <td>{{ product.name }}</td>
@@ -77,26 +86,29 @@
                     <span>Choose excluded product(s)</span>
                 </div>
                 <div class="search">
-                    <a-input v-model:value="search_excluded" :suffix="this.list_excluded.length + ' selected'"
+                    <a-input v-model:value="search_excluded"
+                             :suffix="this.list_excluded.length + ' selected'"
                              placeholder="Search product by name"/>
                 </div>
                 <div class="excluded_products" v-if="this.list_excluded.length > 0">
-                    <div v-for="excluded_product of this.list_excluded" class="excluded_product"
+                    <div v-for="excluded_product of this.list_excluded"
+                         class="excluded_product"
                          :key="excluded_product.id">
-                        <div style="height: 17px; margin-left: 10px; margin-bottom: 5px; margin-top: 5px">{{
-                                excluded_product.name
-                            }}
+                        <div style="height: 17px; margin-left: 10px; margin-bottom: 5px; margin-top: 5px">
+                            {{ excluded_product.name }}
                         </div>
-                        <font-awesome-icon :icon="['fas', 'circle-xmark']" size="sm"
-                                           @click="handleClickExcludedProduct(excluded_product.id)"
-                                           style="height: 15px; margin-right: 10px; color: red; margin-top: 5px; width: 15px; margin-bottom: 5px"/>
+                        <font-awesome-icon :icon="['fas', 'circle-xmark']"
+                                           size="sm"
+                                           style="height: 15px; margin-right: 10px; color: red; margin-top: 5px; width: 15px; margin-bottom: 5px"
+                                           @click="handleClickExcludedProduct(excluded_product.id)"/>
                     </div>
                 </div>
                 <div id="table-product">
                     <table>
                         <tr class="table-col-name">
                             <td>
-                                <input id="checkbox-table-excluded-product" type="checkbox" @change="SelectAllExcluded"
+                                <input type="checkbox"
+                                       @change="SelectAllExcluded"
                                        v-model="tickAllExcluded">
                             </td>
                             <td>Image</td>
@@ -108,15 +120,16 @@
                         <tr class="table-row" v-for="product in filteredExcluded" :key="product.id">
                             <td>
                                 <input :checked="list_excluded.filter(e => e.id == product.id).length > 0"
-                                       type="checkbox"
-                                       @change="select_excluded" class="item-excluded-checkbox" :value="{
-                                        id: product.id,
-                                        name: product.name,
-                                        img: product.url_img,
-                                        price: product.price,
-                                        compare_at_price: product.compare_at_price,
-                                        quantity: product.qty
-                                    }">
+                                       @change="select_excluded"
+                                       class="item-excluded-checkbox"
+                                       :value="{
+                                           id: product.id,
+                                           name: product.name,
+                                           img: product.url_img,
+                                           price: product.price,
+                                           compare_at_price: product.compare_at_price,
+                                           quantity: product.qty}"
+                                       type="checkbox">
                             </td>
                             <td><img :src='product.url_img' style="width: 30px; height: 30px"></td>
                             <td>{{ product.name }}</td>

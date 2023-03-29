@@ -20,8 +20,7 @@
                     <a-switch @change="changeWidgetStatus"
                               v-model:checked="this.widget.status"
                               checked-children="ON"
-                              un-checked-children="OFF"
-                    />
+                              un-checked-children="OFF"/>
                 </td>
             </tr>
         </table>

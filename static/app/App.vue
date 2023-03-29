@@ -3,8 +3,7 @@
         <layout-sider>
             <side-bar-menu :currentTab="currentTab"
                            :tabs="tabs"
-                           @changeTab="changeTab"
-            />
+                           @changeTab="changeTab"/>
         </layout-sider>
         <layout>
             <layout-header>
@@ -14,21 +13,17 @@
                 <nav-menu @changeTab="changeTab"
                           :currentTab='currentTab'
                           :navtabs="navtabs"
-                          v-if="navtabs.includes(currentTab)"
-                />
+                          v-if="navtabs.includes(currentTab)"/>
                 <add-product @addProductToCustomization="addProductToCustomization"
                              :products="products"
-                             v-if="currentTab == 'AddProduct'"
-                />
+                             v-if="currentTab == 'AddProduct'"/>
                 <customization @changeTab="changeTab"
                                :list_recommendation="list_recommendation"
                                :list_excluded="list_excluded"
-                               v-if="currentTab == 'Customization'"
-                />
+                               v-if="currentTab == 'Customization'"/>
                 <installation @changeTab="changeTab"
                               :shop_url="shop_url"
-                              v-if="currentTab == 'Installation'"
-                />
+                              v-if="currentTab == 'Installation'"/>
                 <dashboard v-if='currentTab == "Dashboard"'/>
             </layout-content>
         </layout>
@@ -91,9 +86,9 @@ export default {
             this.currentTab = tab
         },
         addProductToCustomization(tab, list_recommendation, list_excluded) {
-            this.currentTab = tab
             this.list_recommendation = list_recommendation
             this.list_excluded = list_excluded
+            this.currentTab = tab
         }
     }
 }
