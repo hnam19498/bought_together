@@ -5,12 +5,12 @@
     </div>
     <div id="setting_customization">
         <label id="settings">Settings</label>
-        <font-awesome-icon :icon="['fass', 'circle-question']" style="color: #5C5F62"/>
+        <font-awesome-icon icon="fa-solid fa-circle-question" style="color: #5C5F62"/>
     </div>
     <div style="display: flex; flex-direction: row; margin-top: 30px">
         <div style="display:flex; flex-direction: column">
             <div class="configuration">
-                <font-awesome-icon :icon="['fass', 'circle-question']" style="color: #5C5F62"/>
+                <font-awesome-icon icon="fa-solid fa-circle-question" style="color: #5C5F62"/>
                 <span>General Configuration</span>
             </div>
             <div class="widget">Widget Title</div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="configuration" style="margin-top: 25px">
-                <font-awesome-icon :icon="['fass', 'circle-question']" style="color: #5C5F62"/>
+                <font-awesome-icon icon="fa-solid fa-circle-question" style="color: #5C5F62"/>
                 <span>Button Configuration</span>
             </div>
             <div class="widget">Button Text</div>
@@ -112,7 +112,7 @@
         </div>
         <div style="display: flex; flex-direction: column; width: 100%">
             <div class="configuration" style="margin-left: -50px">
-                <font-awesome-icon :icon="['fass', 'circle-question']" style="color: #5C5F62"/>
+                <font-awesome-icon icon="fa-solid fa-circle-question" style="color: #5C5F62"/>
                 <span>Preview</span>
             </div>
             <div id="preview">
@@ -126,21 +126,21 @@
                 </div>
                 <div style="display: flex; flex-direction: row">
                     <div
-                        style="display: flex; flex-direction: row; margin-top: 50px; width: 100%; justify-content: center">
+                            style="display: flex; flex-direction: row; margin-top: 50px; width: 100%; justify-content: center">
                         <div :key="product.id"
                              v-for="product in this.list_recommendation"
                              style="display: flex; align-items: center">
                             <img :src="product.img"
-                                 style="border: 1px solid #E2E2E2; border-radius: 5px; width: 65px; height: 65px">
+                                 style="border: 1px solid #E2E2E2; border-radius: 5px; width: 65px; height: 65px"
+                                 :alt="product.name">
                             <div style="margin: 5px; font-weight: 600; font-size: 16px"
                                  v-if="this.list_ids[this.list_ids.length - 1] != product.id">+
                             </div>
                         </div>
                     </div>
-                    <div
-                        style="display: flex; flex-direction: column; align-items: center; width: 50%; margin-left: auto">
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 50%; margin-left: auto">
                         <div
-                            style="display: flex; flex-direction: row; margin-top: 60px; height: 18px; font-style: normal; font-weight: 600; font-size: 16px; line-height: 22px">
+                                style="display: flex; flex-direction: row; margin-top: 60px; height: 18px; font-style: normal; font-weight: 600; font-size: 16px; line-height: 22px">
                             <div style="color: black">Total:</div>
                             <div style="color: red; margin-left: 3px">${{ this.total_price }}</div>
                         </div>
@@ -205,7 +205,7 @@ export default {
                     excluded_products: self.list_excluded,
                     total_compare_at_price: self.total_compare_at_price
                 }
-            }).then(function (res) {
+            }).then(() => {
                 self.$emit('changeTab', 'Installation')
             }).catch(error => {
                 console.log(error)

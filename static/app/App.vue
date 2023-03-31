@@ -16,15 +16,15 @@
                           v-if="navtabs.includes(currentTab)"/>
                 <add-product @addProductToCustomization="addProductToCustomization"
                              :products="products"
-                             v-if="currentTab == 'AddProduct'"/>
+                             v-if="currentTab=='AddProduct'"/>
                 <customization @changeTab="changeTab"
                                :list_recommendation="list_recommendation"
                                :list_excluded="list_excluded"
-                               v-if="currentTab == 'Customization'"/>
+                               v-if="currentTab=='Customization'"/>
                 <installation @changeTab="changeTab"
                               :shop_url="shop_url"
-                              v-if="currentTab == 'Installation'"/>
-                <dashboard v-if='currentTab == "Dashboard"'/>
+                              v-if="currentTab=='Installation'"/>
+                <dashboard v-if='currentTab=="Dashboard"'/>
             </layout-content>
         </layout>
     </layout>
@@ -47,7 +47,7 @@ export default {
         axios.post('https://odoo.website/bought_together/get_product', {
             jsonrpc: "2.0",
             params: {}
-        }).then(function (res) {
+        }).then(res => {
             self.products = res.data.result.product_data
             self.shop_url = res.data.result.shop_url
         }).catch(error => {
