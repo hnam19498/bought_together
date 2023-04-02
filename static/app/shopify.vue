@@ -44,8 +44,8 @@
                  :key="product.variant_id">
                 <input type="checkbox"
                        :value="product.variant_id"
-                       disabled
-                       :checked="this.cart.includes(product.variant_id)">
+                       :checked="this.cart.includes(product.variant_id)"
+                       disabled>
                 <div class="redirectToProduct" @click="redirectToProduct(product.url)">{{ product.name }}</div>
                 <span style="color: red">${{ product.price }}</span>
             </div>

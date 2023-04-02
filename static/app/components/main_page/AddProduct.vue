@@ -151,6 +151,14 @@ import {notification} from 'ant-design-vue'
 import {CloseCircleFilled} from "@ant-design/icons-vue"
 
 export default {
+    mounted() {
+        let self = this
+        if (window.list_recommendation) {
+            self.list_recommendation = window.list_recommendation
+            self.list_excluded = window.list_excluded
+            self.enable_widget = window.enable_widget
+        }
+    },
     emits: ['addProductToCustomization'],
     props: {products: Array},
     components: {Loading, CloseCircleFilled},
@@ -182,7 +190,8 @@ export default {
                 'addProductToCustomization',
                 "Customization",
                 this.list_recommendation,
-                this.list_excluded
+                this.list_excluded,
+                this.enable_widget
             )
         },
         cancelAddProducts() {
@@ -199,7 +208,7 @@ export default {
                 message: message,
                 duration: duration,
                 class: 'error_popup',
-                closeIcon: function (e) {
+                closeIcon: e => {
                     return (<CloseCircleFilled/>)
                 }
             })
